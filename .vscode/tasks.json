@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command":"clang-cl",
+            "args": [
+                "Ops.cpp",
+                "Test.cpp",
+                "/Z7", 
+                "/MDd", 
+                "/W4", 
+                "/EHsc", 
+                "/std:c++17", 
+                "/Od",
+                "/o", 
+                "Debug/Test.exe"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "run",
+            "dependsOn": "build",
+            "command": "${workspaceFolder}/Debug/Test.exe",
+            "type": "shell"
+        }
+    ]
+}
