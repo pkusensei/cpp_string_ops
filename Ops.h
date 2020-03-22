@@ -67,10 +67,17 @@ std::vector<std::basic_string_view<CharT>> string_split(It begin, It end, CharT 
     return result;
 }
 
+///
+/// Commented code ensures Args... is over CharT
+/// But that does not work with const CharT* etc.
+///
+/// template <typename CharT = char, template<typename...>typename... Args>
 template <typename CharT = char, typename... Args>
+/// std::basic_string<CharT> build_string(Args<CharT> &&... args)
 std::basic_string<CharT> build_string(Args &&... args)
 {
     auto ss = std::basic_stringstream<CharT>();
+    // (ss << ... << std::forward<Args<CharT>>(args));
     (ss << ... << std::forward<Args>(args));
     return ss.str();
 }
